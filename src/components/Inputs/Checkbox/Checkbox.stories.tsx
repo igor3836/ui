@@ -50,6 +50,52 @@ export const CheckboxChecked: Story = {
   },
 }
 
+export const CheckboxStates: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, max-content)', gap: 24 }}>
+      {(['sm', 'md'] as const).map((size) => (
+        <div
+          key={size}
+          style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+          data-testid={`checkbox-${size}`}
+        >
+          <CheckboxComponent
+            size={size}
+            label='Запомнить карту'
+            description='•• 4021, до 09/28'
+          />
+          <CheckboxComponent
+            size={size}
+            label='Запомнить карту'
+            defaultChecked
+          />
+          <CheckboxComponent
+            size={size}
+            label='Все операции'
+            indeterminate
+          />
+          <CheckboxComponent
+            size={size}
+            label='Запомнить карту'
+            disabled
+          />
+          <CheckboxComponent
+            size={size}
+            label='Запомнить карту'
+            disabled
+            defaultChecked
+          />
+          <CheckboxComponent
+            size={size}
+            label='Запомнить карту'
+            error='Обязательное поле'
+          />
+        </div>
+      ))}
+    </div>
+  ),
+}
+
 // ----------------------------------------------------------------------
 
 export default meta

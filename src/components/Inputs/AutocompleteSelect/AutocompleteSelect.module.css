@@ -1,3 +1,11 @@
-.root .section {
-  --right-section-end: rem(3px);
+/* Figma: Search Input 5783:25982 / Select Input 1031:39958 — tail icon 20x20, 12px from the field edge,
+   4px gap to the text. Dropdown / options reuse ../Select/Select.module.css (Select menu 996:87499). */
+.root {
+  --input-right-section-width: rem(36px);
+
+  .section[data-position='right'] {
+    --right-section-end: 0;
+    justify-content: flex-end;
+    padding-inline-end: rem(12px);
+  }
 }

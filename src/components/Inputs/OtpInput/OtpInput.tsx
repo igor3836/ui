@@ -13,7 +13,7 @@ const DEFAULT_SEPARATOR_INDEX = 3
 
 const inputClassName = clsx(
   classes.input,
-  textClasses['body-m-regular'],
+  textClasses['caption-l-regular'],
   inputBaseClasses['input-base']
 )
 
@@ -45,7 +45,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref)
   return (
     <Input.Wrapper
       error={error}
-      classNames={{ error: inputBaseClasses['error-message'] }}
+      classNames={{ root: inputBaseClasses.wrapper, error: inputBaseClasses['error-message'] }}
     >
       <PinInput
         ref={ref}

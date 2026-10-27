@@ -9,7 +9,7 @@ import clsx from 'clsx'
 
 const inputClassName = clsx(
   classes.input,
-  textClasses['body-m-regular'],
+  textClasses['caption-l-regular'],
   inputBaseClasses['input-base']
 )
 
@@ -23,7 +23,7 @@ export const PinInput = forwardRef<HTMLInputElement, PinInputProps>((props, ref)
   return (
     <Input.Wrapper
       error={error}
-      classNames={{ error: inputBaseClasses['error-message'] }}
+      classNames={{ root: inputBaseClasses.wrapper, error: inputBaseClasses['error-message'] }}
     >
       <PinInputComponent
         ref={ref}

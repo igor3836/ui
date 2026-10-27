@@ -4,28 +4,38 @@
   --ai-size-md: rem(40px);
   --ai-size-lg: rem(48px);
 
+  /* Figma Button / Type=Icon only: radius xs 8, sm 10, md/lg 12; icon xs 14, sm 16, md/lg 20 */
   --ai-radius-xs: var(--mantine-radius-md);
-  --ai-radius-sm: var(--mantine-radius-sm);
-  --ai-radius-md: var(--mantine-radius-md);
-  --ai-radius-lg: var(--mantine-radius-lg);
+  --ai-radius-sm: var(--mantine-radius-lg);
+  --ai-radius-md: var(--mantine-radius-xl);
+  --ai-radius-lg: var(--mantine-radius-xl);
+
+  --ai-icon-size: rem(20px);
 
   background-color: var(--ai-bg);
   color: var(--ai-color);
 
+  /* Figma has no pressed offset */
+  &:active {
+    transform: none;
+  }
+
   &[data-size='xs'] {
     --ai-radius: var(--ai-radius-xs);
+    --ai-icon-size: rem(14px);
   }
 
   &[data-size='sm'] {
-    --ai-radius: var(--ai-radius-lg);
+    --ai-radius: var(--ai-radius-sm);
+    --ai-icon-size: rem(16px);
   }
 
   &[data-size='md'] {
-    --ai-radius: var(--ai-radius-xl);
+    --ai-radius: var(--ai-radius-md);
   }
 
   &[data-size='lg'] {
-    --ai-radius: var(--ai-radius-xl);
+    --ai-radius: var(--ai-radius-lg);
   }
 
   &[data-variant='primary'] {
@@ -107,4 +117,9 @@
     border: rem(1px) solid var(--color-border-action-focus-light);
     box-shadow: var(--shadow-focus-ring-light);
   }
+}
+
+.icon > svg {
+  width: var(--ai-icon-size);
+  height: var(--ai-icon-size);
 }

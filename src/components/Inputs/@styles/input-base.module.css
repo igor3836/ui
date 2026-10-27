@@ -1,17 +1,30 @@
+/* Shared field states for cell inputs (PinInput, OtpInput) — mirrors Figma Input Size=md */
 .input-base {
+  --input-color: var(--color-text-base-primary);
+  --input-placeholder-color: var(--color-text-base-tertiary);
+  --input-disabled-bg: var(--color-background-input-disabled);
+  --input-disabled-color: var(--color-text-base-quaternary);
+  --input-bd: var(--color-border-action-normal);
+
+  box-shadow: var(--mantine-shadow-xs);
+
   @media (hover: hover) {
     &:hover:where(:not([data-loading], :disabled, [data-disabled])) {
       --input-bd: var(--color-border-action-hover);
     }
   }
 
+  /* Figma keeps Shadows/xs on the container and adds Focus Ring/Light on the field */
+  &:focus,
   &:focus-within {
     --input-bd: var(--color-border-action-focus-light);
-    box-shadow: var(--shadow-focus-ring-light);
+    box-shadow: var(--shadow-focus-ring-light), var(--mantine-shadow-xs);
   }
 
+  /* Figma Target=Destructive: only border / ring change, text stays text/base/primary */
   &[data-error] {
-    --input-color: var(--color-text-status-destructive);
+    --input-color: var(--color-text-base-primary);
+    --input-placeholder-color: var(--color-text-base-tertiary);
     --input-bd: var(--color-border-action-destructive);
 
     @media (hover: hover) {
@@ -20,19 +33,30 @@
       }
     }
 
+    &:focus,
     &:focus-within {
       --input-bd: var(--color-border-action-focus-destructive-light);
-      box-shadow: var(--shadow-focus-ring-light-destructive);
+      box-shadow: var(--shadow-focus-ring-light-destructive), var(--mantine-shadow-xs);
     }
   }
 
   &:disabled,
-  [data-disabled] {
+  &[data-disabled] {
     --input-bd: var(--color-border-action-disabled);
+    --input-placeholder-color: var(--color-text-base-quaternary);
+    opacity: 1;
     box-shadow: none;
   }
 }
 
+/* Wraps the cells + error: Figma Input gap 8px between field and helper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+}
+
+/* Figma Helper State=Destructive: Caption L/Regular, 24px row, 16px icon, gap 4px */
 .error-message {
   padding-block: rem(2px);
   font-size: var(--mantine-font-size-caption-l);
@@ -47,7 +71,7 @@
     height: rem(16px);
     background: currentColor;
     mask: url('../../../assets/error.svg') no-repeat;
-    margin-top: rem(1.5px);
+    margin-top: rem(2px);
     margin-right: rem(4px);
     flex-shrink: 0;
   }

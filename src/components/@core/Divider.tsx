@@ -1,2 +1,5 @@
+import { Divider as MantineDivider } from '@mantine/core'
 import '@mantine/core/styles/Divider.layer.css'
-export { Divider } from '@mantine/core'
+import classNames from './Divider.module.css'
+
+export const Divider = MantineDivider.withProps({ classNames })

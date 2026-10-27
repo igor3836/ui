@@ -1,3 +1,113 @@
-.root .section {
-  --right-section-end: rem(3px);
+/* Figma: Select Input 1031:39958 (tail icon) + Select menu 996:87499 (dropdown / options).
+   Field itself comes from ../Input/Input.module.css. */
+
+/* tail icon: 20x20, 12px from the field edge, 4px gap to the text (text area ends 36px from the edge) */
+.root {
+  --input-right-section-width: rem(36px);
+
+  .section[data-position='right'] {
+    --right-section-end: 0;
+    --combobox-chevron-color: var(--input-section-color);
+    justify-content: flex-end;
+    padding-inline-end: rem(12px);
+
+    > svg {
+      width: rem(20px);
+      height: rem(20px);
+    }
+  }
+}
+
+/* Dropdown / Select: 1px border/action/normal, r12, Shadows/lg, 4px vertical padding,
+   items 36px tall with 2px/6px outer padding. Figma strokes are inside, so CSS padding = Figma - 1px border */
+.dropdown {
+  padding: rem(3px) rem(5px);
+  border: rem(1px) solid var(--color-border-action-normal);
+  border-radius: var(--mantine-radius-xl);
+  background-color: var(--color-background-modal-default);
+  box-shadow: var(--mantine-shadow-lg);
+
+  /* OptionsDropdown reserves var(--combobox-padding) = 4px for the scrollbar inside the scroll area */
+  &[data-composed] {
+    padding-inline-end: rem(1px);
+  }
+
+  :global(.mantine-ScrollArea-scrollbar) {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  :global(.mantine-ScrollArea-thumb) {
+    border-radius: rem(999px);
+    background-color: var(--color-background-surface-neutral-subtle);
+  }
+}
+
+/* Item: Wrap p6 r6 + text frame p0/4 -> 6px 10px, Caption L/Regular, 32px tall */
+.option {
+  margin-block: rem(2px);
+  padding: rem(6px) rem(10px);
+  gap: rem(4px);
+  border-radius: var(--mantine-radius-sm);
+  background-color: var(--color-background-overlay-normal);
+  color: var(--color-text-base-primary);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+  font-weight: 400;
+
+  /* selected value */
+  &[data-checked] {
+    background-color: var(--color-background-overlay-active-normal);
+  }
+
+  /* keyboard-active option looks like hover */
+  &[data-combobox-selected] {
+    background-color: var(--color-background-overlay-hover);
+    color: var(--color-text-base-primary);
+  }
+
+  &[data-checked][data-combobox-selected] {
+    background-color: var(--color-background-overlay-active-hover);
+  }
+
+  @mixin hover {
+    &:where(:not([data-combobox-disabled])) {
+      background-color: var(--color-background-overlay-hover);
+    }
+
+    &:where([data-checked]:not([data-combobox-disabled])) {
+      background-color: var(--color-background-overlay-active-hover);
+    }
+  }
+
+  &[data-combobox-disabled] {
+    opacity: 1;
+    background-color: var(--color-background-overlay-normal);
+    color: var(--color-text-base-quaternary);
+  }
+
+  /* check icon: 12x9 glyph in a 20x20 slot, icon/base/secondary */
+  > svg {
+    width: rem(12px);
+    min-width: rem(12px);
+    height: rem(9px);
+    margin-inline: rem(4px);
+    opacity: 1;
+    color: var(--color-icon-base-secondary);
+  }
+
+  &[data-combobox-disabled] > svg {
+    color: var(--color-icon-base-quaternary);
+  }
+}
+
+/* Not in Figma: styled like an option row, text/base/tertiary */
+.empty {
+  margin-block: rem(2px);
+  padding: rem(6px) rem(10px);
+  color: var(--color-text-base-tertiary);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
 }

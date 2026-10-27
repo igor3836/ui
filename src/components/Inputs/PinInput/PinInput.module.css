@@ -1,17 +1,15 @@
-.root {
-  margin-bottom: 0.5rem;
-}
-
+/* No PIN component in Figma — cells follow ❖ Input › OTP 13200:2092 (42x40, gap 4px, Caption L/Regular) */
 .pinInput {
-  /* 
-    44:50, original:
-    height: pin-input-size
-    width: pin-input-size
-  */
-  width: calc(var(--pin-input-size) * 0.88);
+  width: rem(42px);
+  height: 2.5rem;
+  /* the wrapper gap handles the spacing to the error (Mantine adds an error offset per cell) */
+  margin-block: 0;
 }
 
 .input {
-  --input-bd: var(--mantine-color-border-action-normal-0);
-  box-shadow: var(--mantine-shadow-xs);
+  --input-height: 2.5rem;
+  --input-size: 2.5rem;
+
+  height: 2.5rem;
+  min-height: 2.5rem;
 }

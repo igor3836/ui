@@ -1,20 +1,30 @@
+/*
+ * Figma: Notification 2066:51710 (no separate inline-alert component in the kit).
+ * Message only  -> Size=sm: padding 12, gap 8, text Body S/Medium primary.
+ * Title + message -> Size=md: padding 16, gap 12, title Body S/Medium, message Caption L/Regular secondary.
+ * Frame: radius 12, stroke border/action/normal 1px inside, Tooltip/sm shadow, fill surface/default.
+ * Figma strokes take no layout space, so paddings are the Figma value minus the 1px border.
+ */
 .root {
-  padding: rem(16px);
-  box-shadow:
-    0px 3px 10px -2px rgba(20, 21, 26, 0.02),
-    0px 10px 16px -3px rgba(20, 21, 26, 0.05);
+  --alert-gap: rem(8px);
+  padding: calc(rem(12px) - rem(1px));
+  box-shadow: var(--shadow-tooltip-sm);
+
+  &:has(.title) {
+    --alert-gap: rem(12px);
+    padding: calc(rem(16px) - rem(1px));
+  }
 
   &[data-variant='warning'] {
-    --alert-bg: var(--color-background-surface-warning-subtle);
+    --alert-bg: var(--color-background-surface-default);
     --alert-bd: rem(1px) solid var(--color-border-action-normal);
     --alert-color: var(--color-icon-status-warning);
   }
 
   &[data-variant='danger'] {
-    --alert-bg: var(--color-background-surface-destructive);
-    --alert-bd: rem(1px) solid var(--color-border-action-destructive);
+    --alert-bg: var(--color-background-surface-default);
+    --alert-bd: rem(1px) solid var(--color-border-action-normal);
     --alert-color: var(--color-icon-status-destructive);
-    --alert-message-color: var(--color-text-status-destructive);
   }
 }
 
@@ -22,8 +32,26 @@
   align-items: flex-start;
 }
 
+/* Figma icon slot: 20x24 frame, 20px icon centred (padding 2/0) */
 .icon {
-  margin-inline-end: rem(12px);
+  width: rem(20px);
+  height: rem(24px);
+  margin-top: 0;
+  margin-inline-end: var(--alert-gap);
+  align-items: center;
+  color: var(--alert-color);
+}
+
+.body {
+  gap: rem(4px);
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--mantine-font-size-body-s);
+  line-height: var(--mantine-line-height-body-s);
+  letter-spacing: var(--mantine-spacing-body-s);
+  color: var(--color-text-base-primary);
 }
 
 .message {
@@ -31,5 +59,28 @@
   font-size: var(--mantine-font-size-body-s);
   line-height: var(--mantine-line-height-body-s);
   letter-spacing: var(--mantine-spacing-body-s);
-  color: var(--alert-message-color, var(--color-text-base-primary));
+  color: var(--color-text-base-primary);
+
+  .title + & {
+    font-weight: 400;
+    font-size: var(--mantine-font-size-caption-l);
+    line-height: var(--mantine-line-height-caption-l);
+    letter-spacing: var(--mantine-spacing-caption-l);
+    color: var(--color-text-base-secondary);
+  }
+}
+
+/* Figma close-fill: 20x20 icon, icon/base/secondary */
+.root .closeButton {
+  --cb-size: rem(20px);
+  width: rem(20px);
+  height: rem(20px);
+  margin-inline-start: var(--alert-gap);
+  color: var(--color-icon-base-secondary);
+
+  svg {
+    flex-shrink: 0;
+    width: rem(20px);
+    height: rem(20px);
+  }
 }

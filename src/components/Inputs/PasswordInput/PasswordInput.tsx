@@ -11,6 +11,8 @@ export const PasswordInput = PasswordInputBase.withProps({
     ...classNames,
     root: clsx(classNames.root, sectionClassNames.root),
     section: clsx(classNames.section, sectionClassNames.section),
+    innerInput: sectionClassNames.innerInput,
+    visibilityToggle: sectionClassNames.visibilityToggle,
   },
   autoComplete: 'current-password',
   inputWrapperOrder: ['label', 'input', 'error', 'description'],

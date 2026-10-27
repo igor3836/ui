@@ -12,6 +12,8 @@
   --badge-padding-x-md: rem(4px);
   --badge-padding-x-lg: rem(6px);
 
+  --badge-icon-size: rem(16px);
+
   text-transform: none;
   font-weight: 500;
   letter-spacing: var(--badge-ls);
@@ -19,6 +21,7 @@
 
   &[data-size='xs'] {
     --badge-radius: var(--mantine-radius-xs);
+    --badge-icon-size: rem(12px);
     --badge-label-padding-x: rem(2px);
     --badge-lh: var(--mantine-line-height-caption-m);
     --badge-ls: var(--mantine-spacing-caption-m);
@@ -26,6 +29,7 @@
 
   &[data-size='sm'] {
     --badge-radius: var(--mantine-radius-sm);
+    --badge-icon-size: rem(14px);
     --badge-label-padding-x: rem(3px);
     --badge-lh: var(--mantine-line-height-caption-m);
     --badge-ls: var(--mantine-spacing-caption-m);
@@ -69,22 +73,32 @@
     --badge-color: var(--color-text-accent-purple-inverted);
   }
 
+  /* Mantine's built-in 'white' variant sets --badge-bg/--badge-color inline, so set the properties directly */
   &[data-variant='white'] {
-    --badge-bg: var(--color-background-badge-white);
-    --badge-color: var(--color-text-base-secondary);
+    background: var(--color-background-badge-white);
+    color: var(--color-text-base-secondary);
   }
 
   &[data-variant='white-destructive'] {
     --badge-bg: var(--color-background-badge-white);
     --badge-color: var(--color-text-status-destructive);
+
+    & .section {
+      color: var(--color-icon-status-destructive-secondary);
+    }
   }
 }
 
 .section {
   margin-inline: 0;
+
+  /* Figma icon slot: xs 12, sm 14, md/lg 16 */
+  & > svg {
+    width: var(--badge-icon-size);
+    height: var(--badge-icon-size);
+  }
 }
 
 .label {
-  margin-bottom: rem(-1px);
   padding-inline: var(--badge-label-padding-x);
 }

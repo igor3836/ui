@@ -1,7 +1,18 @@
+/*
+ * Figma: the close button in Modal is Button / Type=Icon only, Style=Tertiary, Size=xs, Shape=Pill
+ * (24x24, radius 999, close-fill 14px, icon/base/secondary). The tertiary fill is set by the
+ * consumer (Modal) because Notification uses the same CloseButton as a bare 20px icon.
+ */
 .root {
   --cb-size: rem(24px);
+  --cb-radius: rem(999px);
   border: rem(1px) solid transparent;
   color: var(--color-icon-base-secondary);
+
+  /* Figma has no pressed offset */
+  &:active {
+    transform: none;
+  }
 
   @mixin hover {
     background-color: var(--color-background-button-tertiary-hover);
@@ -10,5 +21,11 @@
   &:focus-visible {
     border-color: var(--color-border-action-focus-light);
     box-shadow: var(--shadow-focus-ring-light);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    opacity: 1;
+    color: var(--color-icon-base-quaternary);
   }
 }

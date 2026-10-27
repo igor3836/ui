@@ -1,3 +1,9 @@
+/*
+ * Figma Pagination / Type=Numbers: _Number 40 (md) / 32 (sm), radius 12 / 10, Body S / Caption L Medium,
+ * text/base/secondary; Hover = background/button/tertiary; Active and Focus = tertiary + text/base/primary
+ * (Focus also border/action/focus-light 1px + Focus Ring/Light). Arrows = Button Ghost Icon only
+ * (icon 20 / 16, icon/base/secondary, disabled icon/base/quaternary). Gap 8.
+ */
 .root {
   --pagination-active-bg: var(--color-background-button-tertiary);
   --pagination-active-color: var(--color-text-base-primary);
@@ -5,28 +11,50 @@
   --pagination-control-size-sm: rem(32px);
   --pagination-control-size-md: rem(40px);
 
+  /* md is the default (Mantine sets no data-size attribute when size is not passed) */
+  --pagination-control-radius: var(--mantine-radius-xl);
+  --pagination-icon-size: rem(20px);
+  --pagination-fz: var(--mantine-font-size-body-s);
+  --pagination-ls: var(--mantine-spacing-body-s);
+
   color: var(--color-text-base-secondary);
   font-weight: 500;
 
   &[data-size='sm'] {
     --pagination-control-radius: var(--mantine-radius-lg);
-
-    & .control {
-      --pagination-control-fz: var(--mantine-font-size-caption-l);
-    }
+    --pagination-icon-size: rem(16px);
+    --pagination-fz: var(--mantine-font-size-caption-l);
+    --pagination-ls: var(--mantine-spacing-caption-l);
   }
+}
 
-  &[data-size='md'] {
-    --pagination-control-radius: var(--mantine-radius-xl);
-
-    & .control {
-      --pagination-control-fz: var(--mantine-font-size-body-s);
-    }
-  }
+.control,
+.dots {
+  font-size: var(--pagination-fz);
+  letter-spacing: var(--pagination-ls);
 }
 
 .control {
   border-color: transparent;
+
+  /* Figma _Number / arrow buttons are fixed squares (40 / 32) with the content centred */
+  &:where([data-with-padding]) {
+    padding: 0;
+  }
+
+  /* Figma has no pressed offset */
+  &:active {
+    transform: none;
+  }
+
+  & svg {
+    width: var(--pagination-icon-size);
+    height: var(--pagination-icon-size);
+  }
+
+  &:where(:disabled, [data-disabled]) {
+    opacity: 1;
+  }
 }
 
 .control:not([data-active]) {
@@ -40,5 +68,11 @@
 
 .control:focus-visible {
   border-color: var(--color-border-action-focus-light);
+  background: var(--color-background-button-tertiary);
+  color: var(--color-text-base-primary);
   box-shadow: var(--shadow-focus-ring-light);
+}
+
+.control:where(:disabled, [data-disabled]):not([data-active]) {
+  color: var(--color-icon-base-quaternary);
 }

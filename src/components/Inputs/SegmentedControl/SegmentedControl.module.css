@@ -1,53 +1,53 @@
+/*
+ * Figma Tab Menu / Type=Segmented (track) + Segmented (items):
+ * track p2 g2, background/overlay/custom, radius 12 (sm 10);
+ * item lg 44 (p10/12 + label p0/4, Body S), md 36 (p6/10 + 4, Body S), sm 28 (p4/8 + 4, Caption L), radius 10 (sm 8);
+ * Default text/base/secondary, Hover background/button/tertiary + text/base/primary,
+ * Active background/button/secondary + border/action/normal 1px inside + Shadows/xs + text/base/primary,
+ * Disabled text/base/quaternary.
+ */
 .root {
-  --sc-padding-sm: rem(5px) rem(10px);
-  --sc-padding-md: rem(9px) rem(12px);
-  --sc-padding-lg: rem(11px) rem(14px);
-  --sc-color: var(--mantine-primary-color-filled);
-  --sc-label-color: var(--color-text-base-inverted);
-  --separator-color: var(--color-border-action-normal);
+  --sc-padding-sm: rem(4px) rem(12px);
+  --sc-padding-md: rem(6px) rem(14px);
+  --sc-padding-lg: rem(10px) rem(16px);
+  --sc-item-radius: var(--mantine-radius-lg);
 
-  padding: 0;
-  border: rem(1px) solid var(--color-border-action-normal);
+  gap: rem(2px);
+  padding: rem(2px);
   border-radius: var(--mantine-radius-xl);
-  background-color: var(--mantine-color-white);
-  box-shadow: var(--mantine-shadow-xs);
+  background-color: var(--color-background-overlay-custom);
 
-  &:has(.label[data-active]:not([data-disabled], [data-read-only]):hover) {
-    --sc-color: var(--mantine-primary-color-filled-hover);
+  &[data-size='sm'] {
+    --sc-item-radius: var(--mantine-radius-md);
+    border-radius: var(--mantine-radius-lg);
   }
-
-  &:has(.input:disabled:checked) {
-    --sc-color: var(--color-background-button-primary-disabled);
-  }
-}
-
-.control {
-  --separator-color: var(--color-border-action-normal);
 }
 
 .indicator {
-  border-radius: 0;
-  box-shadow: none;
+  border: rem(1px) solid var(--color-border-action-normal);
+  border-radius: var(--sc-item-radius);
+  background-color: var(--color-background-button-secondary);
+  box-shadow: var(--mantine-shadow-xs);
 }
 
 .label {
-  border-radius: 0;
+  border-radius: var(--sc-item-radius);
   font-family: var(--mantine-font-family);
   font-weight: 500;
-  font-size: var(--mantine-font-size-caption-l);
-  line-height: var(--mantine-line-height-caption-l);
-  letter-spacing: var(--mantine-spacing-caption-l);
+  font-size: var(--mantine-font-size-body-s);
+  line-height: var(--mantine-line-height-body-s);
+  letter-spacing: var(--mantine-spacing-body-s);
   color: var(--color-text-base-secondary);
 
   @media (hover: hover) {
     &:where(:not([data-disabled], [data-active], [data-read-only])):hover {
-      background-color: var(--color-background-surface-neutral);
-      color: var(--color-text-base-secondary);
+      background-color: var(--color-background-button-tertiary);
+      color: var(--color-text-base-primary);
     }
   }
 
   &[data-active] {
-    color: var(--color-text-base-inverted);
+    color: var(--color-text-base-primary);
   }
 
   &[data-disabled] {
@@ -55,17 +55,22 @@
   }
 }
 
-.root[data-size='lg'] .label {
-  font-size: var(--mantine-font-size-body-s);
-  line-height: var(--mantine-line-height-body-s);
-  letter-spacing: var(--mantine-spacing-body-s);
+.root[data-size='sm'] .label {
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
 }
 
+/* before initialisation Mantine paints the active item with ::before instead of the indicator */
 .label[data-active]::before {
-  border-radius: 0;
+  border: rem(1px) solid var(--color-border-action-normal);
+  border-radius: var(--sc-item-radius);
+  background-color: var(--color-background-button-secondary);
+  box-shadow: var(--mantine-shadow-xs);
 }
 
+/* Figma has no focus state for Segmented; keep a kit-style focus ring inside the track */
 .input:focus-visible + .label {
   --segmented-control-outline: none;
-  box-shadow: inset 0 0 0 rem(2px) var(--color-border-action-focus-light);
+  box-shadow: inset 0 0 0 rem(1px) var(--color-border-action-focus-light);
 }

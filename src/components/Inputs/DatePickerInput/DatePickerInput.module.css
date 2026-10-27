@@ -1,0 +1,222 @@
+/* Figma: Calendar 2835:42669, _Date Item 2829:41836, _Date Range Item 2835:42092 (Blank_2.7 x KVELL).
+   Field itself comes from ../Input/Input.module.css. */
+
+/* Calendar card: 284px wide, padding 12, r12, 1px border/action/normal, surface/default, Shadows/lg.
+   Figma strokes are inside, so CSS padding = 12 - 1px border */
+.dropdown {
+  padding: rem(11px);
+  border: rem(1px) solid var(--color-border-action-normal);
+  border-radius: var(--mantine-radius-xl);
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+/* Header 24px: month label on the left (Caption L/Medium), 20px arrows on the right with 8px gap */
+.calendarHeader {
+  --dch-control-size: rem(20px);
+  max-width: none;
+  height: rem(24px);
+  margin-bottom: rem(12px);
+  align-items: center;
+}
+
+.calendarHeaderLevel {
+  order: 0;
+  flex: 1;
+  justify-content: flex-start;
+  height: rem(24px);
+  margin-inline-end: rem(12px);
+  padding-block: rem(2px);
+  border-radius: var(--mantine-radius-md);
+  color: var(--color-text-base-primary);
+  font-weight: 500;
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+
+  @mixin hover {
+    &:where(:not([data-static], :disabled, [data-disabled])) {
+      background-color: transparent;
+      color: var(--color-text-base-secondary);
+    }
+  }
+}
+
+.calendarHeaderControl {
+  order: 1;
+  width: rem(20px);
+  height: rem(20px);
+  border-radius: var(--mantine-radius-xs);
+  color: var(--color-icon-base-secondary);
+
+  &[data-direction='next'] {
+    order: 2;
+    margin-inline-start: rem(8px);
+  }
+
+  @mixin hover {
+    &:where(:not([data-static], :disabled, [data-disabled])) {
+      background-color: var(--color-background-button-ghost-hover);
+    }
+  }
+
+  /* not in Figma: disabled arrow = icon/base/quaternary */
+  &:where(:disabled, [data-disabled]) {
+    opacity: 1;
+    color: var(--color-icon-base-quaternary);
+  }
+}
+
+.calendarHeaderControlIcon {
+  width: rem(20px);
+  height: rem(20px);
+}
+
+/* grid: 260px wide, 7 columns of 37.14px; weekday row 32px + 4px gap; date rows 36px */
+.month {
+  width: rem(260px);
+}
+
+.weekday {
+  height: rem(36px);
+  padding: 0 0 rem(4px);
+  vertical-align: middle;
+  color: var(--color-text-base-secondary);
+  font-size: var(--mantine-font-size-caption-m);
+  line-height: var(--mantine-line-height-caption-m);
+  letter-spacing: var(--mantine-spacing-caption-m);
+  font-weight: 400;
+}
+
+.monthCell {
+  &,
+  &[data-with-spacing] {
+    padding: rem(2px);
+  }
+}
+
+/* _Date Item: 32px tall, fills the cell minus 2px, r8, Caption L/Regular text/base/secondary */
+.day {
+  --day-band: var(--color-background-button-ghost-hover);
+
+  width: 100%;
+  height: rem(32px);
+  border: rem(1px) solid transparent;
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--color-background-button-ghost);
+  color: var(--color-text-base-secondary);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+  opacity: 1;
+
+  @mixin hover {
+    &:where(:not([data-static], [data-disabled], [data-selected], [data-in-range])) {
+      background-color: var(--color-background-button-ghost-hover);
+    }
+  }
+
+  /* no weekend colouring in Figma */
+  &[data-weekend] {
+    color: var(--color-text-base-secondary);
+  }
+
+  /* Current Date=True: Figma uses text/accent/purple-accent — a kit error, accents are brand */
+  &[data-today] {
+    color: var(--color-text-accent-brand-accent);
+  }
+
+  &[data-today][data-highlight-today]:not([data-selected], [data-in-range]) {
+    border-color: transparent;
+  }
+
+  /* previous/next month days look like State=Disabled in Figma */
+  &[data-outside],
+  &:disabled,
+  &[data-disabled] {
+    color: var(--color-text-base-quaternary);
+    opacity: 1;
+  }
+
+  /* State=Active: button/secondary + 1px border/action/focus, text/base/primary */
+  &[data-selected] {
+    border-color: var(--color-border-action-focus);
+    background-color: var(--color-background-button-secondary);
+    color: var(--color-text-base-primary);
+
+    @mixin hover {
+      background-color: var(--color-background-button-secondary);
+    }
+  }
+
+  &[data-selected][data-today] {
+    color: var(--color-text-accent-brand-accent);
+  }
+
+  /* _Date Range Item: ghost-hover band across the whole cell (incl. the 2px cell padding) */
+  &[data-in-range] {
+    border-radius: 0;
+    background-color: var(--day-band);
+    box-shadow:
+      rem(-2px) 0 0 0 var(--day-band),
+      rem(2px) 0 0 0 var(--day-band);
+
+    @mixin hover {
+      &:where(:not([data-selected], [data-disabled], [data-static])) {
+        background-color: var(--day-band);
+      }
+    }
+  }
+
+  &[data-first-in-range] {
+    border-start-start-radius: var(--mantine-radius-md);
+    border-end-start-radius: var(--mantine-radius-md);
+    background-color: var(--color-background-button-secondary);
+    box-shadow: rem(2px) 0 0 0 var(--day-band);
+  }
+
+  &[data-last-in-range] {
+    border-start-end-radius: var(--mantine-radius-md);
+    border-end-end-radius: var(--mantine-radius-md);
+    background-color: var(--color-background-button-secondary);
+    box-shadow: rem(-2px) 0 0 0 var(--day-band);
+  }
+
+  &[data-first-in-range][data-last-in-range] {
+    border-radius: var(--mantine-radius-md);
+    box-shadow: none;
+  }
+}
+
+/* month / year levels (not in Figma) follow the day item look */
+.monthsListControl,
+.yearsListControl {
+  border: rem(1px) solid transparent;
+  border-radius: var(--mantine-radius-md);
+  color: var(--color-text-base-secondary);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+  opacity: 1;
+
+  @mixin hover {
+    &:where(:not([data-disabled], :disabled, [data-selected], [data-in-range])) {
+      background-color: var(--color-background-button-ghost-hover);
+    }
+  }
+
+  &:where(:disabled, [data-disabled]) {
+    color: var(--color-text-base-quaternary);
+    opacity: 1;
+  }
+
+  &[data-selected] {
+    border-color: var(--color-border-action-focus);
+    background-color: var(--color-background-button-secondary);
+    color: var(--color-text-base-primary);
+  }
+
+  &[data-in-range] {
+    background-color: var(--color-background-button-ghost-hover);
+  }
+}

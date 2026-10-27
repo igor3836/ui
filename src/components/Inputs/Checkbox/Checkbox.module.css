@@ -1,30 +1,116 @@
+/* Figma: Checkbox 576:31267 + Checkbox Label 576:32034 (Blank_2.7 x KVELL) */
+
 .root {
   --checkbox-size-sm: rem(16px);
   --checkbox-size-md: rem(20px);
   --checkbox-radius: var(--mantine-radius-xs);
-}
+  --checkbox-icon-color: var(--color-border-base-surface);
 
-.label {
-  --label-offset-start: rem(8px);
-}
+  /* gap between box and text: sm 8px, md 12px */
+  &[data-label-position='right'] {
+    --label-offset-start: rem(8px);
+  }
 
-:where([data-mantine-color-scheme='light']) .root:hover .input:not(:checked):not(:disabled) {
-  border-color: var(--color-border-action-hover);
+  &[data-label-position='left'] {
+    --label-offset-end: rem(8px);
+  }
+
+  &[data-size='md'][data-label-position='right'] {
+    --label-offset-start: rem(12px);
+  }
+
+  &[data-size='md'][data-label-position='left'] {
+    --label-offset-end: rem(12px);
+  }
 }
 
 .inner {
+  /* Mantine always sets --checkbox-color inline on root (primary = black), so override it one level down */
+  --checkbox-color: var(--color-background-checkbox-checked);
   margin-top: rem(2px);
 }
 
 .input {
+  background-color: var(--color-background-checkbox-default);
+  border-color: var(--color-border-action-normal);
   box-shadow: var(--mantine-shadow-xs);
+
+  &[data-error] {
+    border-color: var(--mantine-color-error);
+  }
+
+  &:checked,
+  &[data-indeterminate] {
+    background-color: var(--checkbox-color);
+    border-color: var(--checkbox-color);
+  }
+
+  &:focus-visible {
+    /* Figma Checkbox State=Focus: 1px white + 2.5px spread, no Shadows/xs.
+       Figma paints the ring Blank violet (#c8b2ff99) — a kit error, accents are brand */
+    box-shadow:
+      0 0 0 rem(1px) var(--color-border-base-surface),
+      0 0 0 rem(2.5px) var(--color-focus-ring-light);
+  }
+
+  &:disabled {
+    background-color: var(--color-background-checkbox-disabled);
+    border-color: var(--color-background-checkbox-disabled);
+    box-shadow: none;
+  }
+
+  &:disabled + .icon {
+    color: var(--color-border-base-surface);
+  }
 }
 
-:where([data-mantine-color-scheme='light']) .input:disabled {
-  background-color: var(--mantine-color-background-checkbox-disabled-0);
-  border-color: var(--mantine-color-background-checkbox-disabled-0);
+@media (hover: hover) {
+  .root:hover .input:not(:checked, [data-indeterminate], :disabled, [data-error]) {
+    border-color: var(--color-border-action-hover);
+  }
 }
 
-[data-mantine-color-scheme='light'] .input:disabled + .icon {
-  color: var(--mantine-color-border-base-surface-0);
+/* check 8x6 / dash 8px, centered in the box for both sizes */
+.icon {
+  width: rem(8px);
+  height: rem(6px);
+  overflow: visible;
+}
+
+.label {
+  color: var(--color-text-base-primary);
+
+  &[data-disabled] {
+    color: var(--color-text-base-primary);
+  }
+}
+
+.description,
+.error {
+  /* InputWrapper's padding: 0 can load after InlineInput's offset — keep the text under the label */
+  padding-inline-start: var(--label-offset-start);
+  padding-inline-end: var(--label-offset-end);
+}
+
+.description {
+  margin-top: rem(4px);
+  color: var(--color-text-base-secondary);
+  font-weight: 400;
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+}
+
+.root[data-size='md'] {
+  .label {
+    font-size: var(--mantine-font-size-body-s);
+    line-height: var(--mantine-line-height-body-s);
+    letter-spacing: var(--mantine-spacing-body-s);
+  }
+
+  .description {
+    font-size: var(--mantine-font-size-body-s);
+    line-height: var(--mantine-line-height-body-s);
+    letter-spacing: var(--mantine-spacing-body-s);
+  }
 }

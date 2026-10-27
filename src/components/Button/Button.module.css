@@ -4,16 +4,25 @@
   --button-height-md: rem(40px);
   --button-height-lg: rem(48px);
 
-  --button-padding-x-xs: rem(8px);
-  --button-padding-x-sm: rem(10px);
-  --button-padding-x-md: rem(12px);
-  --button-padding-x-lg: rem(16px);
+  /* Figma padding (xs 8, sm 10, md 12, lg 16) minus the 1px border, which Figma draws inside */
+  --button-padding-x-xs: rem(7px);
+  --button-padding-x-sm: rem(9px);
+  --button-padding-x-md: rem(11px);
+  --button-padding-x-lg: rem(15px);
+
+  --button-icon-size: rem(20px);
 
   font-weight: 500;
   border: rem(1px) solid transparent;
 
+  /* Figma has no pressed offset */
+  &:active {
+    transform: none;
+  }
+
   &[data-size='xs'] {
     --button-radius: var(--mantine-radius-md);
+    --button-icon-size: rem(14px);
     font-size: var(--mantine-font-size-caption-m);
     line-height: var(--mantine-line-height-caption-m);
     letter-spacing: var(--mantine-spacing-caption-m);
@@ -21,6 +30,7 @@
 
   &[data-size='sm'] {
     --button-radius: var(--mantine-radius-lg);
+    --button-icon-size: rem(16px);
     font-size: var(--mantine-font-size-caption-l);
     line-height: var(--mantine-line-height-caption-l);
     letter-spacing: var(--mantine-spacing-caption-l);
@@ -44,6 +54,7 @@
     --button-bg: var(--color-background-button-primary);
     --button-hover: var(--color-background-button-primary-hover);
     --button-color: var(--color-text-base-inverted);
+    --button-icon-color: var(--color-icon-base-inverted);
     box-shadow: var(--mantine-shadow-xs);
 
     &:focus-visible {
@@ -60,6 +71,7 @@
     --button-bg: var(--color-background-button-secondary);
     --button-hover: var(--color-background-button-secondary-hover);
     --button-color: var(--color-text-base-primary);
+    --button-icon-color: var(--color-icon-base-secondary);
     border-color: var(--color-border-action-normal);
     box-shadow: var(--mantine-shadow-xs);
 
@@ -84,6 +96,7 @@
     --button-bg: var(--color-background-button-tertiary);
     --button-hover: var(--color-background-button-tertiary-hover);
     --button-color: var(--color-text-base-primary);
+    --button-icon-color: var(--color-icon-base-secondary);
 
     &:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
       background-color: var(--color-background-button-tertiary);
@@ -98,6 +111,7 @@
     --button-bg: transparent;
     --button-hover: var(--color-background-button-ghost-hover);
     --button-color: var(--color-text-base-secondary);
+    --button-icon-color: var(--color-icon-base-secondary);
     box-shadow: none;
 
     &:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
@@ -111,6 +125,10 @@
 
   &:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
     color: var(--color-text-base-quaternary);
+
+    & .section {
+      color: var(--color-icon-base-quaternary);
+    }
   }
 
   &:focus-visible {
@@ -118,12 +136,24 @@
     box-shadow: var(--shadow-focus-ring-light);
   }
 
+  /* Figma keeps the same horizontal padding with lead/tail icons */
   &:where([data-with-left-section]) {
     padding-inline-start: var(--button-padding-x);
+  }
+
+  &:where([data-with-right-section]) {
+    padding-inline-end: var(--button-padding-x);
   }
 }
 
 .section {
+  color: var(--button-icon-color, currentColor);
+
+  & > svg {
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+  }
+
   &:where([data-position='left']) {
     margin-inline-end: rem(4px);
 
@@ -154,25 +184,48 @@
   --button-hover: transparent;
   --button-color: var(--color-text-base-primary);
   --button-hover-color: var(--color-text-base-secondary);
+  --button-icon-color: var(--color-icon-base-secondary);
   --button-radius: var(--mantine-radius-xs);
   --button-height-sm: rem(20px);
   --button-height-md: rem(24px);
   padding-inline: 0;
+  border-width: 0;
 
   &:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
     background: none;
+  }
 
-    & .section svg {
-      fill: var(--color-text-base-quaternary);
-    }
+  /* no border box on the link (Figma stroke is inside and takes no space): draw focus stroke as inset shadow */
+  &:focus-visible {
+    box-shadow:
+      inset 0 0 0 rem(1px) var(--color-border-action-focus),
+      var(--shadow-focus-ring-light);
   }
 
   &[data-size='md'] {
     font-size: var(--mantine-font-size-body-s);
+    line-height: var(--mantine-line-height-body-s);
     letter-spacing: var(--mantine-spacing-body-s);
   }
 
   & .label {
-    padding-inline: rem(2px);
+    padding-inline: 0;
+  }
+
+  /* Figma Link Button: icon-label gap md 6, sm 4 */
+  & .section:where([data-position='left']) {
+    margin-inline-end: rem(6px);
+  }
+
+  & .section:where([data-position='right']) {
+    margin-inline-start: rem(6px);
+  }
+
+  &[data-size='sm'] .section:where([data-position='left']) {
+    margin-inline-end: rem(4px);
+  }
+
+  &[data-size='sm'] .section:where([data-position='right']) {
+    margin-inline-start: rem(4px);
   }
 }

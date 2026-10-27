@@ -1,14 +1,14 @@
+/* Figma ❖ Input › OTP 13200:2092: 42x40 cells, gap 4px, "–" separator 12px Body S/Regular text/base/tertiary */
 .root {
-  margin-bottom: 0.5rem;
-
   &::after {
     content: '–';
     order: 1;
     width: rem(12px);
     text-align: center;
     color: var(--color-text-base-tertiary);
-    font-size: var(--mantine-font-size-md);
-    line-height: var(--mantine-line-height-md);
+    font-size: var(--mantine-font-size-body-s);
+    line-height: var(--mantine-line-height-body-s);
+    letter-spacing: var(--mantine-spacing-body-s);
   }
 
   &[data-no-separator]::after {
@@ -18,18 +18,15 @@
 
 .pinInput {
   width: rem(42px);
+  height: 2.5rem;
+  /* the wrapper gap handles the spacing to the error (Mantine adds an error offset per cell) */
+  margin-block: 0;
 }
 
 .input {
-  --input-bd: var(--color-border-action-normal);
-  --input-color: var(--color-text-base-primary);
-  --input-disabled-bg: var(--color-background-input-disabled);
-  --input-disabled-color: var(--color-text-base-quaternary);
-
   --input-height: 2.5rem;
   --input-size: 2.5rem;
 
   height: 2.5rem;
   min-height: 2.5rem;
-  box-shadow: var(--mantine-shadow-xs);
 }

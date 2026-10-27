@@ -1,0 +1,23 @@
+/*
+ * Figma: Divider 637:33880 — 1px line border/base/divider,
+ * label Caption M/Medium text/base/secondary, 8px gap between label and lines.
+ */
+.root {
+  --divider-color: var(--color-border-base-divider);
+}
+
+.label {
+  font-weight: 500;
+  font-size: var(--mantine-font-size-caption-m);
+  line-height: var(--mantine-line-height-caption-m);
+  letter-spacing: var(--mantine-spacing-caption-m);
+  color: var(--color-text-base-secondary);
+
+  &::before {
+    margin-inline-end: rem(8px);
+  }
+
+  &::after {
+    margin-inline-start: rem(8px);
+  }
+}

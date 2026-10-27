@@ -1,6 +1,13 @@
+/*
+ * Figma: Modal 2534:54220 — 400px wide, padding 24, gap 24, radius 16,
+ * stroke border/action/normal 1px (inside), Shadows/lg, close button absolute 16/16.
+ * Figma strokes are drawn inside the frame and take no layout space, so every
+ * CSS offset measured from the outer edge is the Figma value minus the 1px border.
+ */
 .root {
-  --mb-shadow: var(--mantine-shadows-lg);
-  --mb-padding: rem(20px);
+  --modal-size-md: rem(400px);
+  --mb-shadow: var(--mantine-shadow-lg);
+  --mb-padding: calc(rem(24px) - rem(1px));
 }
 
 @media (max-width: $mantine-breakpoint-xs) {
@@ -10,8 +17,13 @@
   }
 }
 
+.overlay {
+  background: var(--color-background-modal-overlay);
+}
+
 .content {
-  border: rem(1px) solid var(--color-border-base-alpha);
+  background-color: var(--color-background-modal-default);
+  border: rem(1px) solid var(--color-border-action-normal);
   border-radius: var(--mantine-radius-xxl);
 
   @media (max-width: $mantine-breakpoint-xs) {
@@ -22,21 +34,33 @@
 
 .header {
   align-items: start;
+  min-height: 0;
+  padding: var(--mb-padding);
+  padding-bottom: rem(24px);
+  background-color: var(--color-background-modal-default);
 }
 
 .body {
-  padding-bottom: rem(32px);
+  padding: 0 var(--mb-padding) var(--mb-padding);
+
+  &:only-child {
+    padding-top: var(--mb-padding);
+  }
 }
 
 .title {
-  font-weight: 600;
-  font-size: var(--mantine-font-size-body-s);
-  line-height: var(--mantine-line-height-body-s);
-  letter-spacing: var(--mantine-spacing-body-s);
+  font-weight: 500;
+  font-size: var(--mantine-font-size-body-m);
+  line-height: var(--mantine-line-height-body-m);
+  letter-spacing: var(--mantine-spacing-body-m);
+  color: var(--color-text-base-primary);
 }
 
 .close {
-  margin-top: rem(-4px);
-  margin-right: rem(1px);
+  --cb-radius: rem(999px);
+  position: absolute;
+  top: calc(rem(16px) - rem(1px));
+  right: calc(rem(16px) - rem(1px));
+  margin: 0;
   background-color: var(--color-background-button-tertiary);
 }

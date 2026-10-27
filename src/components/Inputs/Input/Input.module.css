@@ -4,18 +4,46 @@
   gap: rem(8px);
 }
 
+/* Figma Input › Label: Caption L/Medium, text/base/primary, row 24px (padding 2px) */
+.label {
+  padding-block: rem(2px);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+  font-weight: 500;
+  color: var(--color-text-base-primary);
+}
+
+/* Figma Input › Label › "*": Caption L/Regular, text/status/destructive */
+.required {
+  --input-asterisk-color: var(--color-text-status-destructive);
+  font-weight: 400;
+}
+
 .input {
+  /* Figma Input Size=md: Field 40px (same value as PSP-4008) */
   --input-height: 2.5rem;
   --input-color: var(--color-text-base-primary);
+  --input-placeholder-color: var(--color-text-base-tertiary);
   --input-disabled-bg: var(--color-background-input-disabled);
   --input-disabled-color: var(--color-text-base-quaternary);
   --input-radius: var(--mantine-radius-xl);
   --input-bd: var(--color-border-action-normal);
+  /* Field padding 12px + inner text frame padding 4px */
+  --input-padding-inline-start: rem(16px);
+  --input-padding-inline-end: rem(16px);
 
+  font-size: var(--mantine-font-size-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
   box-shadow: var(--mantine-shadow-xs);
 
-  [data-position='left'] ~ & {
-    --input-padding-inline-start: 2.5rem;
+  /* 12px padding + 20px icon + 4px gap + 4px inner text padding */
+  .wrapper[data-with-left-section] & {
+    --input-padding-inline-start: rem(40px);
+  }
+
+  .wrapper[data-with-right-section] & {
+    --input-padding-inline-end: rem(40px);
   }
 
   @media (hover: hover) {
@@ -24,13 +52,17 @@
     }
   }
 
+  /* Figma keeps Shadows/xs on the container and adds Focus Ring/Light on the field */
+  &:focus,
   &:focus-within {
     --input-bd: var(--color-border-action-focus-light);
-    box-shadow: var(--shadow-focus-ring-light);
+    box-shadow: var(--shadow-focus-ring-light), var(--mantine-shadow-xs);
   }
 
+  /* Figma Target=Destructive: only border / ring change, text stays text/base/primary */
   &[data-error] {
-    --input-color: var(--color-text-status-destructive);
+    --input-color: var(--color-text-base-primary);
+    --input-placeholder-color: var(--color-text-base-tertiary);
     --input-bd: var(--color-border-action-destructive);
 
     @media (hover: hover) {
@@ -39,16 +71,25 @@
       }
     }
 
+    &:focus,
     &:focus-within {
       --input-bd: var(--color-border-action-focus-destructive-light);
-      box-shadow: var(--shadow-focus-ring-light-destructive);
+      box-shadow: var(--shadow-focus-ring-light-destructive), var(--mantine-shadow-xs);
     }
   }
 
+  /* Figma State=Disabled: no opacity, quaternary text, disabled border, no shadow */
   &:disabled,
-  [data-disabled] {
+  &[data-disabled],
+  &:has(input:disabled) {
     --input-bd: var(--color-border-action-disabled);
+    --input-placeholder-color: var(--color-text-base-quaternary);
+    opacity: 1;
     box-shadow: none;
+  }
+
+  &[data-multiline] {
+    line-height: var(--mantine-line-height-caption-l);
   }
 }
 
@@ -56,10 +97,11 @@
   margin-bottom: 0;
 }
 
+/* Figma lead / tail icon: 20px, 12px from the field edge, icon/base/tertiary */
 .section {
   --input-section-color: var(--color-icon-base-tertiary);
-  --right-section-end: 0.25rem;
-  --left-section-start: 0.25rem;
+  --right-section-end: rem(5px);
+  --left-section-start: rem(5px);
 
   .wrapper[data-disabled] & {
     --input-section-color: var(--color-icon-base-quaternary);
@@ -88,6 +130,10 @@
 
 .description {
   color: var(--color-text-base-tertiary);
+
+  .root:has(.wrapper[data-disabled]) & {
+    color: var(--color-text-base-quaternary);
+  }
 }
 
 .error {

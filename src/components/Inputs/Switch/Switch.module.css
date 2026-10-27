@@ -1,15 +1,115 @@
-.track {
-  --switch-color: var(--mantine-color-background-toggle-active-0);
+/* Figma: Toggle 593:4174 + Toggle Label 593:4983 (Blank_2.7 x KVELL).
+   FE size xs = Figma sm (28x16, knob 12), FE size sm = Figma md (34x20, knob 16); knob inset 2px. */
 
-  input:not(:checked) + & {
-    background-color: var(--mantine-color-background-toggle-default-0);
+.root {
+  --switch-height-xs: rem(16px);
+  --switch-width-xs: rem(28px);
+  --switch-thumb-size-xs: rem(12px);
+  --switch-track-label-padding-xs: rem(2px);
+
+  --switch-height-sm: rem(20px);
+  --switch-width-sm: rem(34px);
+  --switch-thumb-size-sm: rem(16px);
+  --switch-track-label-padding-sm: rem(2px);
+
+  --label-offset-start: rem(16px);
+}
+
+.track {
+  /* Figma Toggle Label: knob container has 1px (sm) / 2px (md) top padding vs. the 20/24px text line */
+  margin-top: rem(1px);
+  --switch-bg: var(--color-background-toggle-default);
+
+  .root[data-size='sm'] & {
+    margin-top: rem(2px);
+  }
+
+  input:checked + & {
+    --switch-bg: var(--color-background-toggle-active);
+  }
+
+  input:disabled + & {
+    --switch-bg: var(--color-background-toggle-disabled);
+  }
+
+  input:checked:disabled + & {
+    --switch-bg: var(--color-background-toggle-active-disabled);
+  }
+
+  input:focus-visible + & {
+    outline: none;
+    /* Figma Toggle State=Focus: 1px white + 2.5px spread.
+       Figma paints the ring Blank violet (#c8b2ff99) — a kit error, accents are brand */
+    box-shadow:
+      0 0 0 rem(1px) var(--color-border-base-surface),
+      0 0 0 rem(2.5px) var(--color-focus-ring-light);
+  }
+}
+
+@media (hover: hover) {
+  .root:hover input:not(:disabled) + .track {
+    --switch-bg: var(--color-background-toggle-hover);
+  }
+
+  .root:hover input:checked:not(:disabled) + .track {
+    --switch-bg: var(--color-background-toggle-active-hover);
+  }
+}
+
+.thumb {
+  --switch-thumb-bg: var(--color-background-toggle-handle);
+  box-shadow: var(--mantine-shadow-xs);
+
+  &::before {
+    display: none;
+  }
+
+  input:disabled + * > & {
+    --switch-thumb-bg: var(--color-background-toggle-handle-disabled);
+    box-shadow: none;
+  }
+
+  input:checked:disabled + * > & {
+    --switch-thumb-bg: var(--color-background-toggle-handle);
+  }
+}
+
+/* Label = Caption L/Medium primary (Body S/Medium for FE size sm);
+   Caption (description) = Caption L/Regular secondary, 4px below the label.
+   Description alone (no label) is styled as the label, as FE uses it today. */
+.label,
+.description {
+  font-family: var(--mantine-font-family);
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+
+  .root[data-size='sm'] & {
+    font-size: var(--mantine-font-size-body-s);
+    line-height: var(--mantine-line-height-body-s);
+    letter-spacing: var(--mantine-spacing-body-s);
+  }
+}
+
+.label {
+  font-weight: 500;
+  color: var(--color-text-base-primary);
+
+  &[data-disabled] {
+    color: var(--color-text-base-primary);
   }
 }
 
 .description {
-  margin-top: -1px;
-  --label-offset-start: 1rem;
-  color: var(--mantine-color-primary);
+  margin-top: rem(4px);
+  font-weight: 400;
+  color: var(--color-text-base-secondary);
+
+  .labelWrapper:not(:has(.label)) & {
+    margin-top: 0;
+    font-weight: 500;
+    color: var(--color-text-base-primary);
+  }
 }
 
 .error {
@@ -23,8 +123,4 @@
     top: 3px;
     left: -0.25rem;
   }
-}
-
-.thumb::before {
-  display: none;
 }
