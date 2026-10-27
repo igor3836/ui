@@ -1,5 +1,6 @@
-import { createPolymorphicComponent, Loader, Button as MantineButton } from '@mantine/core'
+import { createPolymorphicComponent, Button as MantineButton } from '@mantine/core'
 import type { ButtonProps as BaseButtonProps } from '@mantine/core'
+import { RiLoaderLine } from '@remixicon/react'
 import classNames from './Button.module.css'
 import { forwardRef } from 'react'
 import type { ExtendedButtonVariant } from './types'
@@ -26,6 +27,7 @@ export const Button = createPolymorphicComponent<'button', ButtonProps>(
       size = 'md',
       variant = 'primary',
       loading,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Mantine's loader isn't rendered
       loaderProps,
       leftSection,
       disabled,
@@ -43,11 +45,10 @@ export const Button = createPolymorphicComponent<'button', ButtonProps>(
         aria-busy={loading || undefined}
         leftSection={
           loading ? (
-            <Loader
-              type='oval'
-              color='currentColor'
+            <RiLoaderLine
+              className={classNames.loader}
               size={LOADER_SIZES[size] ?? LOADER_SIZES.md}
-              {...loaderProps}
+              aria-hidden
             />
           ) : (
             leftSection
