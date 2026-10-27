@@ -4,6 +4,7 @@
  * Title + message -> Size=md: padding 16, gap 12, title Body S/Medium, message Caption L/Regular secondary.
  * Frame: radius 12, stroke border/action/normal 1px inside, Tooltip/sm shadow, fill surface/default.
  * Figma strokes take no layout space, so paddings are the Figma value minus the 1px border.
+ * Product exception: danger keeps its destructive background, border and message colour.
  */
 .root {
   --alert-gap: rem(8px);
@@ -22,9 +23,10 @@
   }
 
   &[data-variant='danger'] {
-    --alert-bg: var(--color-background-surface-default);
-    --alert-bd: rem(1px) solid var(--color-border-action-normal);
+    --alert-bg: var(--color-background-surface-destructive);
+    --alert-bd: rem(1px) solid var(--color-border-action-destructive);
     --alert-color: var(--color-icon-status-destructive);
+    --alert-message-color: var(--color-text-status-destructive);
   }
 }
 
@@ -59,7 +61,7 @@
   font-size: var(--mantine-font-size-body-s);
   line-height: var(--mantine-line-height-body-s);
   letter-spacing: var(--mantine-spacing-body-s);
-  color: var(--color-text-base-primary);
+  color: var(--alert-message-color, var(--color-text-base-primary));
 
   .title + & {
     font-weight: 400;

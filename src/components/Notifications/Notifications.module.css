@@ -4,6 +4,7 @@
  * Title + message -> Size=md: padding 16, gap 12, title Body S/Medium, description Caption L/Regular secondary, gap 4.
  * Every status (Info/Warning/Destructive/Success) has the same frame: fill surface/default,
  * stroke border/action/normal 1px inside, radius 12, Tooltip/sm shadow; only the lead icon colour changes.
+ * Product exception: the error toast keeps its destructive background.
  * Figma strokes take no layout space, so paddings are the Figma value minus the 1px border.
  */
 .root {
@@ -20,8 +21,20 @@
     padding: calc(rem(16px) - rem(1px));
   }
 
+  /* stack spacing: Mantine puts it on its own item class, which notifications.show({ className }) replaces */
+  & + & {
+    margin-top: var(--mantine-spacing-md);
+  }
+
   &:global(.error) {
     --notification-color: var(--color-icon-status-destructive);
+    background-color: var(--color-background-surface-destructive);
+
+    & .closeButton {
+      @mixin hover {
+        background-color: var(--color-background-button-destructive-tertiary);
+      }
+    }
   }
 }
 
