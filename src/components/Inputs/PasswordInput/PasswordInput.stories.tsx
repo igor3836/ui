@@ -36,6 +36,14 @@ export const PasswordInputError: Story = {
   },
 }
 
+export const PasswordInputDisabled: Story = {
+  args: {
+    label: 'Введите пароль',
+    defaultValue: 'kvell-2026',
+    disabled: true,
+  },
+}
+
 // ----------------------------------------------------------------------
 
 export default meta
