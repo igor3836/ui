@@ -1,6 +1,6 @@
 import { createPolymorphicComponent, Button as MantineButton } from '@mantine/core'
 import type { ButtonProps as BaseButtonProps } from '@mantine/core'
-import { RiLoaderLine } from '@remixicon/react'
+import { RiLoader2Line } from '@remixicon/react'
 import classNames from './Button.module.css'
 import { forwardRef } from 'react'
 import type { ExtendedButtonVariant } from './types'
@@ -45,7 +45,7 @@ export const Button = createPolymorphicComponent<'button', ButtonProps>(
         aria-busy={loading || undefined}
         leftSection={
           loading ? (
-            <RiLoaderLine
+            <RiLoader2Line
               className={classNames.loader}
               size={LOADER_SIZES[size] ?? LOADER_SIZES.md}
               aria-hidden

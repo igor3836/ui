@@ -146,12 +146,12 @@
   }
 }
 
-/* Remix loader-line (iOS-style, 8 spokes) in the left icon slot while loading; turns spoke by spoke */
+/* Remix loader-2-line (iOS-style, 8 spokes) in the left icon slot while loading */
 .loader {
-  animation: loader-spin 0.8s steps(8) infinite;
+  animation: loader-spin 1.6s linear infinite;
 
   @media (prefers-reduced-motion: reduce) {
-    animation-duration: 2.4s;
+    animation-duration: 3.2s;
   }
 }
 
