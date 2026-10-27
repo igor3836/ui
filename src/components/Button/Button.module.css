@@ -146,6 +146,18 @@
   }
 }
 
+/* Loading keeps the label: Button.tsx puts the spinner in the left icon slot, so drop Mantine's overlay */
+.root:where([data-loading]) {
+  &::before {
+    display: none;
+  }
+
+  & .inner {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .section {
   color: var(--button-icon-color, currentColor);
 

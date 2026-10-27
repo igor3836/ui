@@ -1,4 +1,4 @@
-import { createPolymorphicComponent, Button as MantineButton } from '@mantine/core'
+import { createPolymorphicComponent, Loader, Button as MantineButton } from '@mantine/core'
 import type { ButtonProps as BaseButtonProps } from '@mantine/core'
 import classNames from './Button.module.css'
 import { forwardRef } from 'react'
@@ -17,14 +17,42 @@ const MANTINE_VARIANT_ALIASES: Partial<Record<string, ExtendedButtonVariant>> = 
   subtle: 'ghost',
 }
 
+// Figma icon slot per size
+const LOADER_SIZES: Record<string, number> = { xs: 14, sm: 16, md: 20, lg: 20 }
+
 export const Button = createPolymorphicComponent<'button', ButtonProps>(
   forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { size = 'md', variant = 'primary', ...resProps } = props
+    const {
+      size = 'md',
+      variant = 'primary',
+      loading,
+      loaderProps,
+      leftSection,
+      disabled,
+      ...resProps
+    } = props
+
+    // Loading keeps the label: the spinner takes the left icon slot instead of covering the button
     return (
       <MantineButton
         ref={ref}
         size={size}
         variant={MANTINE_VARIANT_ALIASES[variant] ?? variant}
+        disabled={disabled || loading}
+        data-loading={loading || undefined}
+        aria-busy={loading || undefined}
+        leftSection={
+          loading ? (
+            <Loader
+              type='oval'
+              color='currentColor'
+              size={LOADER_SIZES[size] ?? LOADER_SIZES.md}
+              {...loaderProps}
+            />
+          ) : (
+            leftSection
+          )
+        }
         {...resProps}
         classNames={classNames}
       />

@@ -164,6 +164,24 @@ export const ButtonDisabledAndLoading: Story = {
   ),
 }
 
+/** Loading keeps the label; the spinner replaces the left icon (14 / 16 / 20 / 20 px) */
+export const ButtonLoadingSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      {allSizes.map((size) => (
+        <Button
+          key={size}
+          size={size}
+          leftSection={<AddSVG />}
+          loading
+        >
+          Создать
+        </Button>
+      ))}
+    </div>
+  ),
+}
+
 /** Mantine variants have no Figma look: filled → primary, outline/default → secondary, light → tertiary, subtle → ghost */
 export const ButtonMantineVariants: Story = {
   render: () => (
