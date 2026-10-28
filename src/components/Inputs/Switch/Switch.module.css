@@ -101,6 +101,9 @@
 }
 
 .description {
+  /* InputWrapper's padding: 0 can load after InlineInput's offset — keep the text under the label */
+  padding-inline-start: var(--label-offset-start);
+  padding-inline-end: var(--label-offset-end);
   margin-top: rem(4px);
   font-weight: 400;
   color: var(--color-text-base-secondary);
@@ -114,7 +117,7 @@
 
 .error {
   color: var(--color-text-status-destructive);
-  padding-left: 0.25rem;
+  padding-left: calc(var(--label-offset-start) + 0.25rem);
   margin-top: 0;
 
   &::before {
