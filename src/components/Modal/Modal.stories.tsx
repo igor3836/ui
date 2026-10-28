@@ -31,21 +31,12 @@ const ModalWrapper = () => {
           Чтобы оплатить другим способом, необходимо <br />
           вернуться на сайт и повторить платёж
         </Text>
-        <Flex gap='sm'>
-          <Button
-            variant='secondary'
-            size='xs'
-            fullWidth
-          >
-            Вернуться на сайт
-          </Button>
-          <Button
-            variant='primary'
-            size='xs'
-            fullWidth
-          >
-            Остаться
-          </Button>
+        <Flex
+          gap='sm'
+          justify='flex-end'
+        >
+          <Button variant='secondary'>Вернуться на сайт</Button>
+          <Button variant='primary'>Остаться</Button>
         </Flex>
       </Modal>
 
