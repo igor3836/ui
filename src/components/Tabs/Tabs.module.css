@@ -71,6 +71,11 @@
     height: rem(24px);
   }
 
+  /* Figma badge wrapper: 4px each side, so 8px from the label (which has its own 4px) */
+  &:not(:has(> svg)) {
+    padding-inline: rem(4px);
+  }
+
   & > svg {
     width: rem(20px);
     height: rem(20px);
