@@ -119,6 +119,78 @@
   }
 }
 
+/*
+ * Mantine's own variants (raw ActionIcon in apps) set --ai-bg/--ai-color inline, which beats the
+ * variables above, so their closest Blank UI look is set with plain properties:
+ * filled → primary, default/outline → secondary, light → tertiary, subtle/transparent → ghost.
+ */
+.root:where([data-variant='filled']) {
+  border: 0;
+  background-color: var(--color-background-button-primary);
+  color: var(--color-icon-base-inverted);
+  box-shadow: var(--mantine-shadow-xs);
+
+  @mixin hover {
+    background-color: var(--color-background-button-primary-hover);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    background-color: var(--color-background-button-primary-disabled);
+    box-shadow: none;
+  }
+}
+
+.root:where([data-variant='default'], [data-variant='outline']) {
+  border: rem(1px) solid var(--color-border-action-normal);
+  background-color: var(--color-background-button-secondary);
+  color: var(--color-icon-base-secondary);
+  box-shadow: var(--mantine-shadow-xs);
+
+  @mixin hover {
+    border-color: var(--color-border-action-hover);
+    background-color: var(--color-background-button-secondary-hover);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    border-color: var(--color-border-action-disabled);
+    background-color: var(--color-background-button-secondary-disabled);
+    box-shadow: none;
+  }
+}
+
+.root:where([data-variant='light']) {
+  border: 0;
+  background-color: var(--color-background-button-tertiary);
+  color: var(--color-icon-base-secondary);
+
+  @mixin hover {
+    background-color: var(--color-background-button-tertiary-hover);
+  }
+}
+
+.root:where([data-variant='subtle'], [data-variant='transparent']) {
+  border: 0;
+  background-color: transparent;
+  color: var(--color-icon-base-secondary);
+
+  @mixin hover {
+    background-color: var(--color-background-button-ghost-hover);
+  }
+}
+
+.root:where(
+    [data-variant='filled'],
+    [data-variant='default'],
+    [data-variant='outline'],
+    [data-variant='light'],
+    [data-variant='subtle'],
+    [data-variant='transparent']
+  ):where(:disabled, [data-disabled]) {
+  color: var(--color-icon-base-quaternary);
+}
+
 .icon > svg {
   width: var(--ai-icon-size);
   height: var(--ai-icon-size);

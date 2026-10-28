@@ -1,0 +1,40 @@
+/*
+ * Figma: Breadcrumbs 2563:20470 Size=md, Divider=Icon; _Breadcrumb Item 2041:41590; _Breadcrumb Divider 2559:17452.
+ * Items: Caption L/Medium, text/base/secondary, hover and current (last) item text/base/primary.
+ * Divider: arrow-right-s-line 16px, icon/base/secondary, 8px on each side.
+ * Selectors use two classes to win over single-class app styles.
+ */
+.root .breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(6px);
+  color: var(--color-text-base-secondary);
+  font-weight: 500;
+  font-size: var(--mantine-font-size-caption-l);
+  line-height: var(--mantine-line-height-caption-l);
+  letter-spacing: var(--mantine-spacing-caption-l);
+  text-decoration: none;
+
+  @mixin hover {
+    color: var(--color-text-base-primary);
+  }
+
+  &:last-child {
+    color: var(--color-text-base-primary);
+  }
+
+  & > svg {
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+  }
+}
+
+.root .separator {
+  color: var(--color-icon-base-secondary);
+
+  & > svg {
+    width: rem(16px);
+    height: rem(16px);
+  }
+}

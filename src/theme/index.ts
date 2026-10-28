@@ -1,6 +1,14 @@
 import { colorsTuple, type MantineThemeOverride } from '@mantine/core'
 import { Notification } from '../components/Notifications/Notification'
 import { CloseButton } from '../components/CloseButton'
+import { ActionIconTheme } from '../components/ActionIcon/ActionIcon'
+import { BreadcrumbsTheme } from '../components/Breadcrumbs'
+import { ModalTheme } from '../components/Modal/Modal'
+import { PaginationTheme } from '../components/Pagination/Pagination'
+import { SegmentedControlTheme } from '../components/Inputs/SegmentedControl/SegmentedControl'
+import { SwitchTheme } from '../components/Inputs/Switch/Switch'
+import { TabsTheme } from '../components/Tabs'
+import { TitleTheme } from '../components/Title'
 
 // ----------------------------------------------------------------------
 
@@ -165,6 +173,15 @@ export const theme: MantineThemeOverride = {
   components: {
     CloseButton,
     Notification,
+    // raw Mantine components in apps get the kit look through these
+    ActionIcon: ActionIconTheme,
+    Breadcrumbs: BreadcrumbsTheme,
+    Modal: ModalTheme,
+    Pagination: PaginationTheme,
+    SegmentedControl: SegmentedControlTheme,
+    Switch: SwitchTheme,
+    Tabs: TabsTheme,
+    Title: TitleTheme,
   },
   other: {
     // any additional vars

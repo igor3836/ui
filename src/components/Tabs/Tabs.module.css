@@ -1,0 +1,79 @@
+/*
+ * Figma: Tab Menu 953:18063 Type=Fill + item 949:15144 Style=Primary, Shape=Rounded, Size=md.
+ * Applied to every Mantine Tabs variant through theme.components, so raw <Tabs> in apps gets the kit look.
+ * Selectors use two classes to win over single-class app styles.
+ * Figma strokes take no layout space, so paddings are the Figma value minus the 1px border.
+ */
+.list {
+  gap: rem(8px);
+  flex-wrap: wrap;
+
+  /* Mantine default variant draws a bottom line under the list */
+  &::before {
+    display: none;
+  }
+}
+
+.list .tab {
+  height: rem(40px);
+  margin: 0;
+  padding: calc(rem(8px) - rem(1px)) calc(rem(12px) - rem(1px));
+  border: rem(1px) solid transparent;
+  border-radius: var(--mantine-radius-xl);
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--color-text-base-secondary);
+  font-weight: 500;
+  font-size: var(--mantine-font-size-body-s);
+  line-height: var(--mantine-line-height-body-s);
+  letter-spacing: var(--mantine-spacing-body-s);
+
+  @mixin hover {
+    &:where(:not([data-active], :disabled, [data-disabled])) {
+      background-color: var(--color-background-button-tertiary);
+      color: var(--color-text-base-primary);
+    }
+  }
+
+  &[data-active] {
+    background-color: var(--color-background-button-secondary);
+    border-color: var(--color-border-action-normal);
+    box-shadow: var(--mantine-shadow-xs);
+    color: var(--color-text-base-primary);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    opacity: 1;
+    background-color: transparent;
+    color: var(--color-text-base-quaternary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring-light);
+  }
+}
+
+.list .tabLabel {
+  padding-inline: rem(4px);
+}
+
+/* icon slot 24 with a 20px icon */
+.list .tabSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(24px);
+  height: rem(24px);
+  margin: 0;
+
+  & > svg {
+    width: rem(20px);
+    height: rem(20px);
+  }
+}
+
+.panel {
+  padding-top: rem(16px);
+}

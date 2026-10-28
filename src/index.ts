@@ -42,6 +42,11 @@ export { LineChart, BarChart } from './components/Charts'
 //Miscellaneous
 export { Divider } from './components/@core/Divider'
 
+//navigation
+export { Tabs } from './components/Tabs'
+export { Breadcrumbs } from './components/Breadcrumbs'
+export { Title } from './components/Title'
+
 // types ----------------------------------------------------------------
 
 //props
