@@ -59,14 +59,17 @@
   padding-inline: rem(4px);
 }
 
-/* icon slot 24 with a 20px icon */
 .list .tabSection {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: rem(24px);
-  height: rem(24px);
   margin: 0;
+
+  /* icon slot 24 with a 20px icon; other content (e.g. a counter Badge) keeps its own width */
+  &:has(> svg) {
+    width: rem(24px);
+    height: rem(24px);
+  }
 
   & > svg {
     width: rem(20px);
