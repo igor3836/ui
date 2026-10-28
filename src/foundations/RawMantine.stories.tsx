@@ -8,7 +8,6 @@ import {
   SegmentedControl,
   Switch,
   Tabs,
-  Title,
 } from '@mantine/core'
 import { RiMenuLine } from '@remixicon/react'
 
@@ -38,7 +37,6 @@ export const RawMantineComponents: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'flex-start' }}>
-        <Title order={1}>Выплаты</Title>
         <Breadcrumbs>
           <a href='#payouts'>Выплаты</a>
           <span>Реестр № 418</span>

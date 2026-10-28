@@ -8,7 +8,6 @@ import { PaginationTheme } from '../components/Pagination/Pagination'
 import { SegmentedControlTheme } from '../components/Inputs/SegmentedControl/SegmentedControl'
 import { SwitchTheme } from '../components/Inputs/Switch/Switch'
 import { TabsTheme } from '../components/Tabs'
-import { TitleTheme } from '../components/Title'
 
 // ----------------------------------------------------------------------
 
@@ -181,7 +180,6 @@ export const theme: MantineThemeOverride = {
     SegmentedControl: SegmentedControlTheme,
     Switch: SwitchTheme,
     Tabs: TabsTheme,
-    Title: TitleTheme,
   },
   other: {
     // any additional vars

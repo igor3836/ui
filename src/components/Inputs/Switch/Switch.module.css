@@ -1,5 +1,5 @@
 /* Figma: Toggle 593:4174 + Toggle Label 593:4983 (Blank_2.7 x KVELL).
-   FE size xs = Figma sm (28x16, knob 12), FE size sm = Figma md (34x20, knob 16); knob inset 2px. */
+   FE size xs = Figma sm (28x16, knob 12), FE sizes sm/md/lg = Figma md (34x20, knob 16); knob inset 2px. */
 
 .root {
   --switch-height-xs: rem(16px);
@@ -12,6 +12,16 @@
   --switch-thumb-size-sm: rem(16px);
   --switch-track-label-padding-sm: rem(2px);
 
+  /* Figma has two sizes; Mantine's md and lg render as Figma md */
+  --switch-height-md: var(--switch-height-sm);
+  --switch-width-md: var(--switch-width-sm);
+  --switch-thumb-size-md: var(--switch-thumb-size-sm);
+  --switch-track-label-padding-md: var(--switch-track-label-padding-sm);
+  --switch-height-lg: var(--switch-height-sm);
+  --switch-width-lg: var(--switch-width-sm);
+  --switch-thumb-size-lg: var(--switch-thumb-size-sm);
+  --switch-track-label-padding-lg: var(--switch-track-label-padding-sm);
+
   --label-offset-start: rem(16px);
 }
 
@@ -20,7 +30,7 @@
   margin-top: rem(1px);
   --switch-bg: var(--color-background-toggle-default);
 
-  .root[data-size='sm'] & {
+  .root:is([data-size='sm'], [data-size='md'], [data-size='lg']) & {
     margin-top: rem(2px);
   }
 
@@ -84,7 +94,7 @@
   line-height: var(--mantine-line-height-caption-l);
   letter-spacing: var(--mantine-spacing-caption-l);
 
-  .root[data-size='sm'] & {
+  .root:is([data-size='sm'], [data-size='md'], [data-size='lg']) & {
     font-size: var(--mantine-font-size-body-s);
     line-height: var(--mantine-line-height-body-s);
     letter-spacing: var(--mantine-spacing-body-s);

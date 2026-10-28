@@ -223,15 +223,14 @@
   --color-focus-ring-light: #4361ee80;
 }
 
-/* Mantine colour-scheme defaults that leak into components we don't restyle */
+/* Mantine colour-scheme defaults that leak into components we don't restyle.
+   Text and link colours stay theme-driven (theme.black, primary) so app flavors can rebrand them. */
 :root:root[data-mantine-color-scheme='light'],
 :root:root:not([data-mantine-color-scheme]) {
-  --mantine-color-text: var(--color-text-base-primary);
   --mantine-color-body: var(--color-background-surface-default);
   --mantine-color-error: var(--color-text-status-destructive);
   --mantine-color-placeholder: var(--color-text-base-tertiary);
   --mantine-color-dimmed: var(--color-text-base-secondary);
-  --mantine-color-anchor: var(--color-text-accent-brand-accent);
   --mantine-color-default-border: var(--color-border-action-normal);
   --mantine-color-default-hover: var(--color-background-button-secondary-hover);
   --mantine-color-disabled: var(--color-background-button-primary-disabled);
